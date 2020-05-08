@@ -1,6 +1,5 @@
 var express = require('express'),
-    app = express(),
-    cors = require('cors');
+    app = express();
 app.use(express.static('public'));
 require('dotenv').config();
 port = process.env.PORT;
@@ -27,4 +26,4 @@ app.use(function(req, res) {
 });
 
 
-app.listen(9000, () => console.log('Server running on port 9000!'))
+app.listen(process.env.port, () => console.log('Server running on port 9000!'))

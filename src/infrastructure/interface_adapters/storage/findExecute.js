@@ -9,6 +9,12 @@ class FindExecute {
         )
         return { status: "Success", data: query[0] }
     }
+    async trackAllList(expresion, order) {
+        let q = `SELECT tracks.id,tracks.title,tracks.artist,tracks.isrc,tracks.genre,users.name, tracks.status FROM tracks  inner join users on users.id=tracks.userid ${expresion} group by tracks.id ${order}`;
+        console.log('q :>> ', q);
+        let query = await this.client.promise().query(q)
+        return { status: "Success", data: query[0] }
+    }
     async getAllAlbumsFilter() {
         let query = await this.client.promise().query(
             'select * from albums inner JOIN users on users.id=albums.userid inner join country on country.code=users.countrycode where country.name="PERU" and genre="ROCK"'

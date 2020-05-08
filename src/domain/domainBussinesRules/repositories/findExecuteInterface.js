@@ -47,4 +47,7 @@ module.exports = class {
     getAllTracksDifferents() {
         return this.client.getAllTracksDifferents()
     }
+    trackAllList(expresion, order) {
+        return this.client.trackAllList(expresion, order)
+    }
 };
