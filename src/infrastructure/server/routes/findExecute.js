@@ -19,6 +19,7 @@ router.get('/sixView', queryFinds.getTracksDifferents);
 /**CRUDS */
 
 router.get('/tracks', CRUDtracks.getTracks);
+router.delete('/tracks/:idTrack', CRUDtracks.deleteTrack)
 router.post('/tracks', [
     // username must be an email
     check('title').isString(),

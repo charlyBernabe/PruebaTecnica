@@ -10,7 +10,6 @@ const findTrack = (repository, track) => async(req) => {
                 textoResultado: { data: trackObject, code: 200 }
             };
         } else {
-
             return {
                 codigoResultado: 200,
                 textoResultado: {

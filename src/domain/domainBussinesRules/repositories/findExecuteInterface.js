@@ -54,4 +54,8 @@ module.exports = class {
     persistTrack(track) {
         return this.client.persistTrack(track)
     }
+    deleteTrack(track) {
+        return this.client.deleteTrack(track)
+
+    }
 };

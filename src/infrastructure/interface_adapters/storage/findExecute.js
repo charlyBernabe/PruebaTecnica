@@ -114,6 +114,14 @@ class FindExecute {
         return { status: "Success", data: query }
 
     }
+    async deleteTrack(track) {
+        let query = await this.client.promise().query(
+            `delete from tracks where tracks.id=${track}`
+        )
+        console.log('query :>> ', query);
+        return { status: "Success", data: query }
+
+    }
 }
 
 module.exports = FindExecute;

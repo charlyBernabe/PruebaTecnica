@@ -7,6 +7,8 @@ const getTracks = require('../../../domain/applicationBussinesRules/useCases/tra
 const objectTrack = require('../../../domain/domainBussinesRules/entities/track');
 
 const persistTrack = require('../../../domain/applicationBussinesRules/useCases/tracks/createTrack')(repository, objectTrack);
+const deleteTrack = require('../../../domain/applicationBussinesRules/useCases/tracks/deleteTrack')(repository);
+const getOneTrack = require('../../../domain/applicationBussinesRules/useCases/tracks/findOneTrack')(repository);
 const { check, validationResult } = require('express-validator');
 
 exports.getTracks = function(req, res, next) {
@@ -43,6 +45,50 @@ exports.persistTrack = function(req, res, next) {
         return res.status(422).json({ errors: errors.array() });
     }
     persistTrack(req).then(data => {
+            console.log('data controller:>> ');
+            if (data.textoResultado.error) {
+                res.status(200).send({
+                    "code": data.textoResultado.error.code,
+                    "data": data.textoResultado.error.message
+                });
+            } else {
+                res.status(200).send({
+                    "code": data.codigoResultado,
+                    "data": data.textoResultado.data
+                });
+            }
+        })
+        .catch(err => {
+            res.status(400).send({ error: err })
+        });
+}
+
+
+exports.deleteTrack = function(req, res, next) {
+
+    deleteTrack(req).then(data => {
+            console.log('data controller:>> ');
+            if (data.textoResultado.error) {
+                res.status(200).send({
+                    "code": data.textoResultado.error.code,
+                    "data": data.textoResultado.error.message
+                });
+            } else {
+                res.status(200).send({
+                    "code": data.codigoResultado,
+                    "data": data.textoResultado.data
+                });
+            }
+        })
+        .catch(err => {
+            res.status(400).send({ error: err })
+        });
+}
+
+
+exports.getOneTrack = function(req, res, next) {
+
+    getOneTrack(req).then(data => {
             console.log('data controller:>> ');
             if (data.textoResultado.error) {
                 res.status(200).send({
