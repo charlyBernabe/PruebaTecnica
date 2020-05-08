@@ -21,6 +21,83 @@ class FindExecute {
         )
         return { status: "Success", data: query[0] }
     }
+    async updateTrackWithoutArtist(userId, trackId) {
+
+        let query = await this.client.promise().query(
+            `UPDATE tracks
+            SET artist = (select users.name from users inner join tracks on tracks.userid=users.id where users.id="${userId}" group by (users.id))
+            WHERE tracks.id="${trackId}";`
+        )
+        return { status: "Success", data: query[0] }
+    }
+
+
+    async getTrackById(trackId) {
+
+        let query = await this.client.promise().query(
+            `select * from tracks 
+            WHERE tracks.id="${trackId}";`
+        )
+        return { status: "Success", data: query[0] }
+    }
+    async getAlbumsWithTrack() {
+        let query = await this.client.promise().query(
+            `select albumid from tracks GROUP BY albumid`
+        )
+        return { status: "Success", data: query[0] }
+
+    }
+    async getAllAlbums() {
+        let query = await this.client.promise().query(
+            `select * from albums`
+        )
+        return { status: "Success", data: query[0] }
+
+    }
+    async getAllUsers() {
+        let query = await this.client.promise().query(
+            `select * from users`
+        )
+        return { status: "Success", data: query[0] }
+
+    }
+    async updateAlbumById(id, expresion) {
+        let query = await this.client.promise().query(
+            `update albums set ${expresion} where albums.id=${id}`
+        )
+        return { status: "Success", data: query[0] }
+    }
+    async updateUserById(id, expresion) {
+        let query = await this.client.promise().query(
+            `update users set ${expresion} where users.id=${id}`
+        )
+        return { status: "Success", data: query[0] }
+    }
+    async getUsersWithTracksAndAlbums() {
+        let albums = await this.client.promise().query(
+            `SELECT userid FROM albums group by userid`
+        )
+        let tracks = await this.client.promise().query(
+            `SELECT userid FROM tracks group by userid`
+        )
+        let arreglo = new Set();
+        albums[0].forEach(element => {
+            arreglo.add(element.userid)
+        });
+        tracks[0].forEach(element => {
+            arreglo.add(element.userid)
+        });
+        console.log('arreglo :>> ', arreglo);
+        return { status: "Success", data: arreglo }
+    }
+
+    async getAllTracksDifferents() {
+        let query = await this.client.promise().query(
+            `SELECT tracks.id,tracks.title,tracks.artist,tracks.isrc,tracks.genre,tracks.status,albums.title FROM 
+            tracks  inner join albums on albums.id=tracks.albumid where albums.genre!=tracks.genre`
+        )
+        return { status: "Success", data: query[0] }
+    }
 }
 
 module.exports = FindExecute;
