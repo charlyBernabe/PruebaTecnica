@@ -61,9 +61,13 @@ Trae todos los registros de tracks, junto con los siguientes filtros:
 
 QUERYPARAMS->>
 search: *cualquier palabra que coincida con cualquier campo de tracks/users*
+
 username:*Nombre de user del track*
+
 status: *1/0*
+
 order: *Tipo de ordenamiento (title,genre,name...)*
+
 by:*desc/asc*
 
 Response:
@@ -98,6 +102,27 @@ Response:
     "data": {}
     }
 ```
+
+[DELETE] [dominio]/api/tracks/:idTrack
+
+Response:
+```json
+{
+    "code": 200,
+    "data": {}
+    }
+    
+```
+
+[GET] [dominio]/api/tracks/:idTrack
+
+Response:
+```json
+{
+    "code": 200,
+    "data": {}
+    }
+
 
 
 
