@@ -50,4 +50,8 @@ module.exports = class {
     trackAllList(expresion, order) {
         return this.client.trackAllList(expresion, order)
     }
+
+    persistTrack(track) {
+        return this.client.persistTrack(track)
+    }
 };

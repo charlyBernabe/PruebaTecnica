@@ -104,6 +104,16 @@ class FindExecute {
         )
         return { status: "Success", data: query[0] }
     }
+    async persistTrack(track) {
+        console.log(`INSERT INTO tracks VALUES
+        (NULL, '${track.title}', '${track.artist}', '${track.isrc}', '${track.albumid}', '${track.genre}', '${track.userid}', '${track.status}');`);
+        let query = await this.client.promise().query(
+            `INSERT INTO tracks VALUES (NULL, '${track.title}', '${track.artist}', '${track.isrc}', '${track.albumid}', '${track.genre}', '${track.userid}', '${track.status}');`
+        )
+        console.log('query :>> ', query);
+        return { status: "Success", data: query }
+
+    }
 }
 
 module.exports = FindExecute;

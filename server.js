@@ -3,7 +3,7 @@ var express = require('express'),
 app.use(express.static('public'));
 require('dotenv').config();
 port = process.env.PORT;
-
+app.use(express.json());
 
 //api version
 app.get('/api', (req, res) => {
