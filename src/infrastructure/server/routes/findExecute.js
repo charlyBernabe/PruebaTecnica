@@ -31,5 +31,7 @@ router.post('/tracks', [
     check('userid').isInt(),
     check('status').isInt()
 ], CRUDtracks.persistTrack);
+router.get('/tracks/:idTrack', CRUDtracks.getOneTrack);
+
 
 module.exports = router;

@@ -58,4 +58,7 @@ module.exports = class {
         return this.client.deleteTrack(track)
 
     }
+    findTrackByID(track) {
+        return this.client.findTrackByID(track)
+    }
 };
